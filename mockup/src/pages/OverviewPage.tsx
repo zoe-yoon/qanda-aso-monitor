@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   LineChart,
@@ -7,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { PageHeader } from "@/components/organisms/PageHeader";
@@ -17,10 +19,24 @@ import { Badge } from "@/components/atoms/Badge";
 import { DataSourceLabel } from "@/components/molecules/DataSourceLabel";
 import { getKeywords, getWeeklyReport, getCollectionStatus, categoryRankTrend } from "@/data/mockData";
 import { useOS } from "@/contexts/OSContext";
+import { fetchMemos, saveMemo, type MemoEntry } from "@/api/sheets";
 
 export default function OverviewPage() {
   const navigate = useNavigate();
   const { os } = useOS();
+
+  // 메모 상태
+  const [memos, setMemos] = useState<MemoEntry[]>([]);
+  const [memoModal, setMemoModal] = useState<{ open: boolean; date: string; text: string }>({
+    open: false, date: "", text: "",
+  });
+  const [memoSaving, setMemoSaving] = useState(false);
+
+  useEffect(() => {
+    fetchMemos()
+      .then(setMemos)
+      .catch(() => {});
+  }, []);
 
   const keywords = getKeywords(os);
   const weeklyReport = getWeeklyReport(os);
@@ -41,9 +57,44 @@ export default function OverviewPage() {
   // 카테고리 랭킹 차트용 데이터 변환
   const categoryChartData = categoryRankTrend.map((p) => ({
     date: p.date,
+    fullDate: p.fullDate,
     iOS: p.iosIphone,
     Android: p.android,
   }));
+
+  // 차트 날짜(M/D) ↔ 풀 날짜(YYYY-MM-DD) 매핑
+  const dateToFull: Record<string, string> = Object.fromEntries(categoryChartData.map((d) => [d.date, d.fullDate]));
+  const fullToDate: Record<string, string> = Object.fromEntries(categoryChartData.map((d) => [d.fullDate, d.date]));
+
+  // memoMap
+  const memoMapByFull = Object.fromEntries(memos.map((m) => [m.date, m.memo]));
+  const memoMap = Object.fromEntries(
+    memos.filter((m) => fullToDate[m.date]).map((m) => [fullToDate[m.date], m.memo])
+  );
+
+  const handleChartClick = useCallback((data: { activeLabel?: string }) => {
+    if (!data?.activeLabel) return;
+    const chartDate = data.activeLabel;
+    const full = dateToFull[chartDate] || chartDate;
+    setMemoModal({ open: true, date: full, text: memoMapByFull[full] || "" });
+  }, [memoMapByFull, dateToFull]);
+
+  const handleSaveMemo = useCallback(async () => {
+    setMemoSaving(true);
+    try {
+      await saveMemo(memoModal.date, memoModal.text);
+      setMemos((prev) => {
+        const filtered = prev.filter((m) => m.date !== memoModal.date);
+        if (memoModal.text.trim()) {
+          filtered.push({ date: memoModal.date, memo: memoModal.text });
+        }
+        return filtered;
+      });
+      setMemoModal({ open: false, date: "", text: "" });
+    } finally {
+      setMemoSaving(false);
+    }
+  }, [memoModal]);
 
   return (
     <div className="flex flex-col">
@@ -122,23 +173,61 @@ export default function OverviewPage() {
         <div className="bg-background-card rounded-lg shadow-1 p-5">
           <div className="flex items-center justify-between mb-1">
             <h2 className="text-[16px] font-bold leading-[24px] text-foreground-primary">
-              교육 카테고리 무료 앱 순위
+              교육 카테고리 앱 순위
             </h2>
             <span className="text-[12px] font-normal leading-[16px] text-foreground-tertiary">
-              출처: Sensor Tower
+              출처: Sensor Tower · 차트 클릭으로 메모 추가
             </span>
           </div>
           <span className="text-[13px] font-normal leading-[18px] text-foreground-tertiary mb-4 block">
             앱 스토어 교육 카테고리 내 콴다 순위 (낮을수록 좋음)
           </span>
           {categoryChartData.length >= 2 ? (
-            <ResponsiveContainer width="100%" height={260}>
-              <LineChart data={categoryChartData}>
+            <ResponsiveContainer width="100%" height={280}>
+              <LineChart data={categoryChartData} onClick={handleChartClick}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#999999" }} />
                 <YAxis reversed tick={{ fontSize: 11, fill: "#999999" }} domain={[1, "auto"]} />
-                <Tooltip />
+                <Tooltip
+                  content={({ active, payload, label }) => {
+                    if (!active || !payload?.length) return null;
+                    const memo = memoMap[label as string];
+                    return (
+                      <div className="bg-white border border-stroke-inactive rounded-lg shadow-2 p-3 max-w-[240px]">
+                        <div className="text-[12px] font-semibold text-foreground-primary mb-1">{label}</div>
+                        {payload.map((p) => (
+                          <div key={p.name} className="text-[11px] flex justify-between gap-3">
+                            <span style={{ color: p.color }}>{p.name}</span>
+                            <span className="font-semibold">{p.value}위</span>
+                          </div>
+                        ))}
+                        {memo && (
+                          <div className="mt-2 pt-2 border-t border-stroke-inactive">
+                            <div className="text-[11px] font-semibold text-key-foreground2 mb-0.5">ASO 메모</div>
+                            <div className="text-[11px] text-foreground-secondary whitespace-pre-wrap">{memo}</div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
                 <Legend />
+                {memos
+                  .filter((m) => fullToDate[m.date])
+                  .map((m) => (
+                  <ReferenceLine
+                    key={m.date}
+                    x={fullToDate[m.date]}
+                    stroke="#f59e0b"
+                    strokeWidth={2}
+                    strokeDasharray="4 2"
+                    label={{
+                      value: "📝",
+                      position: "top",
+                      fontSize: 12,
+                    }}
+                  />
+                ))}
                 <Line
                   type="monotone"
                   dataKey="iOS"
@@ -178,7 +267,81 @@ export default function OverviewPage() {
               </span>
             </div>
           )}
+
+          {/* 메모 목록 */}
+          {memos.length > 0 && (
+            <div className="mt-4 border-t border-stroke-inactive pt-3">
+              <div className="text-[12px] font-semibold text-foreground-secondary mb-2">ASO 조정 기록</div>
+              <div className="flex flex-col gap-1.5">
+                {memos
+                  .sort((a, b) => b.date.localeCompare(a.date))
+                  .map((m) => (
+                    <button
+                      key={m.date}
+                      onClick={() => setMemoModal({ open: true, date: m.date, text: m.memo })}
+                      className="flex items-start gap-2 text-left hover:bg-overlay-hover rounded px-2 py-1 -mx-2 cursor-pointer transition-colors"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b] mt-1.5 shrink-0" />
+                      <span className="text-[12px] font-semibold text-foreground-primary shrink-0">{m.date}</span>
+                      <span className="text-[12px] text-foreground-tertiary truncate">{m.memo}</span>
+                    </button>
+                  ))}
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* 메모 모달 */}
+        {memoModal.open && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setMemoModal({ open: false, date: "", text: "" })}>
+            <div className="bg-background-card rounded-xl shadow-3 p-5 w-[400px] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
+              <h3 className="text-[16px] font-bold text-foreground-primary mb-1">
+                ASO 메모
+              </h3>
+              <p className="text-[13px] text-foreground-tertiary mb-4">{memoModal.date}</p>
+              <textarea
+                className="w-full h-24 px-3 py-2 border border-stroke-inactive rounded-lg text-[13px] text-foreground-primary bg-background-selectable2 resize-none focus:outline-none focus:ring-2 focus:ring-key-stroke2"
+                placeholder="이 날짜에 적용한 ASO 변경 사항을 기록하세요..."
+                value={memoModal.text}
+                onChange={(e) => setMemoModal((prev) => ({ ...prev, text: e.target.value }))}
+              />
+              <div className="flex justify-end gap-2 mt-3">
+                {memoMapByFull[memoModal.date] && (
+                  <button
+                    className="px-3 py-1.5 text-[13px] text-negative-foreground2 hover:bg-negative-background2 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+                    disabled={memoSaving}
+                    onClick={async () => {
+                      setMemoSaving(true);
+                      try {
+                        await saveMemo(memoModal.date, "");
+                        setMemos((prev) => prev.filter((m) => m.date !== memoModal.date));
+                        setMemoModal({ open: false, date: "", text: "" });
+                      } finally {
+                        setMemoSaving(false);
+                      }
+                    }}
+                  >
+                    삭제
+                  </button>
+                )}
+                <div className="flex-1" />
+                <button
+                  className="px-3 py-1.5 text-[13px] text-foreground-tertiary hover:bg-overlay-hover rounded-lg transition-colors cursor-pointer"
+                  onClick={() => setMemoModal({ open: false, date: "", text: "" })}
+                >
+                  취소
+                </button>
+                <button
+                  className="px-4 py-1.5 text-[13px] font-semibold text-white bg-key-background1 hover:bg-key-background2 rounded-lg transition-colors disabled:opacity-50 cursor-pointer"
+                  disabled={memoSaving}
+                  onClick={handleSaveMemo}
+                >
+                  {memoSaving ? "저장 중..." : "저장"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Notable Changes */}
         <div className="bg-background-card rounded-lg shadow-1">

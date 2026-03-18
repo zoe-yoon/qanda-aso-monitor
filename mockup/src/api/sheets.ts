@@ -40,3 +40,21 @@ export async function adoptSuggestion(
 ): Promise<void> {
   await postToGAS({ type: "adopt-suggestion", keyword, classification });
 }
+
+/** 메모 저장 (날짜별 ASO 조정 사항) */
+export async function saveMemo(
+  date: string,
+  memo: string
+): Promise<void> {
+  await postToGAS({ type: "save-memo", date, memo });
+}
+
+/** 메모 목록 조회 */
+export interface MemoEntry {
+  date: string;
+  memo: string;
+}
+export async function fetchMemos(): Promise<MemoEntry[]> {
+  const res = await fetch(`${GAS_URL}?action=memos`);
+  return res.json();
+}

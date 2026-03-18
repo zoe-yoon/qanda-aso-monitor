@@ -5,9 +5,13 @@
  */
 import { chromium } from 'playwright';
 import { config } from './config.js';
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { writeRankings, writeDownloads, writeCategoryRank, writeSuggestions } from './sheets-writer.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = join(__dirname, '..', 'data');
 
 const AUTH_STATE_FILE = join(config.paths.authState, 'st-session.json');
 
@@ -173,6 +177,15 @@ async function main() {
 
       console.log(`  iOS: ${iosCount}개, Android: ${androidCount}개`);
 
+      // JSON 파일 저장 (주간 리포트용)
+      mkdirSync(DATA_DIR, { recursive: true });
+      const jsonPath = join(DATA_DIR, `st-${date}.json`);
+      if (!existsSync(jsonPath)) {
+        const jsonData = { date, iosRankings, androidRankings, categoryRankings: [], collectedAt: new Date().toISOString() };
+        writeFileSync(jsonPath, JSON.stringify(jsonData, null, 2));
+        console.log(`  💾 JSON 저장: st-${date}.json`);
+      }
+
       await writeRankings('iOS_Rankings', date, iosRankings);
       await writeRankings('Android_Rankings', date, androidRankings);
       await writeDownloads('iOS_Downloads', date, iosRankings);
@@ -202,13 +215,21 @@ async function main() {
       }, { uai: ST.uai, csrf: csrfToken, date });
 
       if (result) {
-        const catData = [{
+        const catEntry = {
           date,
           iosIphone: result.ios?.iphone?.top_free?.primary_categories?.find(c => c['6017'] != null)?.['6017'] ?? null,
           iosIpad: result.ios?.ipad?.top_free?.primary_categories?.find(c => c['6017'] != null)?.['6017'] ?? null,
           android: result.android?.android?.top_free?.primary_categories?.find(c => c['education'] != null)?.['education'] ?? null,
-        }];
-        await writeCategoryRank(date, catData);
+        };
+        await writeCategoryRank(date, [catEntry]);
+
+        // JSON에 카테고리 랭킹 추가
+        const jsonPath = join(DATA_DIR, `st-${date}.json`);
+        if (existsSync(jsonPath)) {
+          const existing = JSON.parse(readFileSync(jsonPath, 'utf-8'));
+          existing.categoryRankings = [catEntry];
+          writeFileSync(jsonPath, JSON.stringify(existing, null, 2));
+        }
       }
     } catch (e) {
       console.error(`  ❌ CategoryRank ${date}: ${e.message}`);
