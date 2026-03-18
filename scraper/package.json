@@ -1,0 +1,16 @@
+{
+  "name": "aso-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "collect": "node src/collect.js",
+    "test-login": "node src/test-login.js",
+    "setup": "npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.50.0",
+    "googleapis": "^144.0.0",
+    "dotenv": "^16.4.0"
+  }
+}

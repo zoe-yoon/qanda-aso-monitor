@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+mockup/dist/
+
+# Environment & secrets
+scraper/.env
+scraper/service-account.json
+scraper/auth-state/
+
+# OS
+.DS_Store
+
+# Vercel
+mockup/.vercel/
+
+# Logs
+scraper/logs/
+
+# Screenshots
+scraper/screenshots/
+
+# Collected data (large JSON files)
+scraper/data/
+
+# IDE
+.vscode/
+.idea/

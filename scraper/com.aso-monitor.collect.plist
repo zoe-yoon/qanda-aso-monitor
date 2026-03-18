@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- 작업 이름 -->
+  <key>Label</key>
+  <string>com.aso-monitor.collect</string>
+
+  <!-- 실행할 스크립트 -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/node</string>
+    <string>/Users/yooni_1/.wizard/output/aso-keyword-monitor/scraper/src/collect.js</string>
+  </array>
+
+  <!-- 작업 디렉토리 -->
+  <key>WorkingDirectory</key>
+  <string>/Users/yooni_1/.wizard/output/aso-keyword-monitor/scraper</string>
+
+  <!-- 매일 KST 9시 (UTC 0시) 실행 -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <!-- 맥북 꺼져있다 켜지면 바로 실행 -->
+  <key>MisfiredBehavior</key>
+  <string>0</string>
+
+  <!-- 로그 파일 -->
+  <key>StandardOutPath</key>
+  <string>/Users/yooni_1/.wizard/output/aso-keyword-monitor/scraper/logs/collect.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/yooni_1/.wizard/output/aso-keyword-monitor/scraper/logs/collect-error.log</string>
+
+  <!-- 환경변수 (PATH에 node 포함) -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+  </dict>
+</dict>
+</plist>

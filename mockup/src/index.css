@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://assets.qanda.ai/common-assets/fonts/pretendard/pretendard-std.css");
+
+* {
+  font-feature-settings: "calt" 1, "tnum" 1, "ss03" 1, "ss10" 1;
+}
+
+body {
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+.h-screen-safe {
+  height: 100dvh;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 200ms ease-out;
+}
