@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "collect": "node src/collect.js",
+    "weekly-report": "node src/weekly-report.js",
     "test-login": "node src/test-login.js",
     "setup": "npx playwright install chromium"
   },

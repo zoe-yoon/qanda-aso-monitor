@@ -28,7 +28,7 @@ loadEnv();
 
 const WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
-const USER_ID = 'U080CUDF0NR'; // Zoe Yoon
+const CHANNEL_ID = process.env.SLACK_CHANNEL_ID || 'C0AKK2TV5GD'; // #aso-monitor 채널
 
 const type = process.argv[2] || 'success';
 const extraMsg = process.argv.slice(3).join(' ');
@@ -83,35 +83,19 @@ function buildMessage() {
 async function send() {
   const message = buildMessage();
 
-  // 방법 1: Bot Token (DM 채널 지원)
+  // 방법 1: Bot Token (채널 전송)
   if (BOT_TOKEN) {
-    // 먼저 유저와의 DM 채널 열기
-    const openRes = await fetch('https://slack.com/api/conversations.open', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${BOT_TOKEN}`,
-      },
-      body: JSON.stringify({ users: USER_ID }),
-    });
-    const openData = await openRes.json();
-    if (!openData.ok) {
-      console.error(`[Slack] DM 채널 열기 실패: ${openData.error}`);
-      process.exit(1);
-    }
-    const dmChannelId = openData.channel.id;
-
     const res = await fetch('https://slack.com/api/chat.postMessage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${BOT_TOKEN}`,
       },
-      body: JSON.stringify({ channel: dmChannelId, text: message }),
+      body: JSON.stringify({ channel: CHANNEL_ID, text: message }),
     });
     const data = await res.json();
     if (data.ok) {
-      console.log(`[Slack] ${type} 알림 전송 완료 (Bot Token → ${dmChannelId})`);
+      console.log(`[Slack] ${type} 알림 전송 완료 (Bot Token → ${CHANNEL_ID})`);
     } else {
       console.error(`[Slack] 전송 실패: ${data.error}`);
       process.exit(1);
