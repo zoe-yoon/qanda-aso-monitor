@@ -273,7 +273,7 @@ export const categoryRankTrend: CategoryRankPoint[] = [
     "date": "3/18",
     "fullDate": "2026-03-18",
     "iosIphone": 36,
-    "iosIpad": 40,
+    "iosIpad": 41,
     "android": 19
   }
 ];
@@ -281,7 +281,7 @@ export const categoryRankTrend: CategoryRankPoint[] = [
 // ─── iOS Data (Sensor Tower 2026-03-18) ───
 
 const iosCollectionStatus: DataCollectionStatus[] = [
-  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 00:58" },
+  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 02:52" },
 ];
 
 const iosKeywords: Keyword[] = [
@@ -1406,7 +1406,7 @@ const iosWeeklyReport: WeeklyReport = {
 // ─── Android Data (Sensor Tower 2026-03-18) ───
 
 const androidCollectionStatus: DataCollectionStatus[] = [
-  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 00:58" },
+  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 02:52" },
 ];
 
 const androidKeywords: Keyword[] = [
