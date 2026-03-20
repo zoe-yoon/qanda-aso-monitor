@@ -11,6 +11,11 @@ function doGet(e) {
     var memosJson = JSON.stringify(getMemos());
     return ContentService.createTextOutput(memosJson).setMimeType(ContentService.MimeType.JSON);
   }
+  if (action === 'downloadSources') {
+    var os = (e && e.parameter && e.parameter.os) || 'ios';
+    var dsJson = JSON.stringify(getDownloadSources(os));
+    return ContentService.createTextOutput(dsJson).setMimeType(ContentService.MimeType.JSON);
+  }
   var defaultJson = JSON.stringify({status: 'ok'});
   return ContentService.createTextOutput(defaultJson).setMimeType(ContentService.MimeType.JSON);
 }
@@ -24,6 +29,7 @@ function doPost(e) {
   if (payload.type === 'downloads') { writeDownloads(payload.sheet, payload.date, payload.data); return okResponse(); }
   if (payload.type === 'categoryRank') { writeCategoryRank(payload.date, payload.data); return okResponse(); }
   if (payload.type === 'suggestions') { writeSuggestions(payload.data); return okResponse(); }
+  if (payload.type === 'downloadSources') { writeDownloadSources(payload.os, payload.entries); return okResponse(); }
   if (payload.type === 'collectionLog') { writeCollectionLog(payload.data); return okResponse(); }
   return okResponse();
 }
@@ -203,6 +209,62 @@ function writeSuggestions(data) {
   });
 }
 
+function getDownloadSources(os) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = 'DownloadSources_' + (os === 'ios' ? 'iOS' : 'Android');
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) { return []; }
+  var data = sheet.getDataRange().getValues();
+  var result = [];
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][0]) {
+      var dateVal;
+      if (data[i][0] instanceof Date) {
+        dateVal = Utilities.formatDate(data[i][0], 'Asia/Seoul', 'yyyy-MM-dd');
+      } else {
+        dateVal = String(data[i][0]).slice(0, 10);
+      }
+      result.push({
+        date: dateVal,
+        organicSearch: data[i][1] || 0,
+        organicBrowse: data[i][2] || 0,
+        paidSearch: data[i][3] || 0,
+        paidDisplay: data[i][4] || 0,
+        webReferral: data[i][5] || 0,
+        appReferral: data[i][6] || 0
+      });
+    }
+  }
+  return result;
+}
+
+function writeDownloadSources(os, entries) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = 'DownloadSources_' + (os === 'ios' ? 'iOS' : 'Android');
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+    sheet.appendRow(['Date', 'OrganicSearch', 'OrganicBrowse', 'PaidSearch', 'PaidDisplay', 'WebReferral', 'AppReferral']);
+  }
+  entries.forEach(function(entry) {
+    var existingRow = findDateRow(sheet, entry.date);
+    var row = [
+      entry.date,
+      entry.organicSearch || 0,
+      entry.organicBrowse || 0,
+      entry.paidSearch || 0,
+      entry.paidDisplay || 0,
+      entry.webReferral || 0,
+      entry.appReferral || 0
+    ];
+    if (existingRow > 0) {
+      sheet.getRange(existingRow, 1, 1, row.length).setValues([row]);
+    } else {
+      sheet.appendRow(row);
+    }
+  });
+}
+
 function writeCollectionLog(data) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('CollectionLog');
@@ -215,7 +277,7 @@ function writeCollectionLog(data) {
 
 function resetSheets() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var keep = ['iOS_Rankings', 'Android_Rankings', 'iOS_Downloads', 'Android_Downloads', 'CategoryRank', 'Suggestions', 'Config', 'CollectionLog', 'Memos'];
+  var keep = ['iOS_Rankings', 'Android_Rankings', 'iOS_Downloads', 'Android_Downloads', 'CategoryRank', 'Suggestions', 'Config', 'CollectionLog', 'Memos', 'DownloadSources_iOS', 'DownloadSources_Android'];
   keep.forEach(function(name) {
     var sheet = ss.getSheetByName(name);
     if (sheet && sheet.getLastRow() > 1) {

@@ -111,6 +111,20 @@ export async function writeSuggestions(date, iosRankings, androidRankings) {
   }
 }
 
+export async function writeDownloadSources(date, downloadSources) {
+  for (const os of ['ios', 'android']) {
+    const entries = downloadSources[os] || [];
+    if (entries.length === 0) continue;
+    await post({
+      type: 'downloadSources',
+      os,
+      date,
+      entries,
+    });
+    console.log(`[Sheets] DownloadSources_${os}: ${entries.length}일 데이터 저장`);
+  }
+}
+
 export async function writeCollectionLog(status, durationSec, iosCount, androidCount, errors) {
   const timestamp = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
   await post({

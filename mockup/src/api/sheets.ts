@@ -49,6 +49,23 @@ export async function saveMemo(
   await postToGAS({ type: "save-memo", date, memo });
 }
 
+/** 유입 경로 데이터 조회 */
+export interface DownloadSourceEntry {
+  date: string;
+  organicSearch: number;
+  organicBrowse: number;
+  paidSearch: number;
+  paidDisplay: number;
+  webReferral: number;
+  appReferral: number;
+}
+export async function fetchDownloadSources(
+  os: "ios" | "android"
+): Promise<DownloadSourceEntry[]> {
+  const res = await fetch(`${GAS_URL}?action=downloadSources&os=${os}`);
+  return res.json();
+}
+
 /** 메모 목록 조회 */
 export interface MemoEntry {
   date: string;

@@ -1,6 +1,6 @@
-// Real data from Sensor Tower — generated 2026-03-18
+// Real data from Sensor Tower — generated 2026-03-20
 // Run: cd scraper && node src/generate-mockdata.js
-// Source: data/st-2026-03-18.json
+// Source: data/st-2026-03-20.json
 
 import type { OS } from "@/contexts/OSContext";
 
@@ -63,23 +63,19 @@ export interface CategoryRankPoint {
   android: number | null;
 }
 
-// ─── Category Ranking Trend (Sensor Tower 2026-03-18) ───
+export interface DownloadSourcePoint {
+  date: string;
+  organicSearch: number;
+  organicBrowse: number;
+  paidSearch: number;
+  paidDisplay: number;
+  webReferral: number;
+  appReferral: number;
+}
+
+// ─── Category Ranking Trend (Sensor Tower 2026-03-20) ───
 
 export const categoryRankTrend: CategoryRankPoint[] = [
-  {
-    "date": "2/17",
-    "fullDate": "2026-02-17",
-    "iosIphone": 63,
-    "iosIpad": 56,
-    "android": 31
-  },
-  {
-    "date": "2/18",
-    "fullDate": "2026-02-18",
-    "iosIphone": 33,
-    "iosIpad": 40,
-    "android": 44
-  },
   {
     "date": "2/19",
     "fullDate": "2026-02-19",
@@ -273,15 +269,29 @@ export const categoryRankTrend: CategoryRankPoint[] = [
     "date": "3/18",
     "fullDate": "2026-03-18",
     "iosIphone": 36,
-    "iosIpad": 41,
+    "iosIpad": 42,
+    "android": 19
+  },
+  {
+    "date": "3/19",
+    "fullDate": "2026-03-19",
+    "iosIphone": 32,
+    "iosIpad": 37,
+    "android": 19
+  },
+  {
+    "date": "3/20",
+    "fullDate": "2026-03-20",
+    "iosIphone": 32,
+    "iosIpad": 37,
     "android": 19
   }
 ];
 
-// ─── iOS Data (Sensor Tower 2026-03-18) ───
+// ─── iOS Data (Sensor Tower 2026-03-20) ───
 
 const iosCollectionStatus: DataCollectionStatus[] = [
-  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 02:52" },
+  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-20 10:01" },
 ];
 
 const iosKeywords: Keyword[] = [
@@ -292,8 +302,8 @@ const iosKeywords: Keyword[] = [
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 7.4,
-    "downloads": 7847,
+    "trafficScore": 7.7,
+    "downloads": 7812,
     "cvr": 0,
     "sparkline": [
       1,
@@ -313,7 +323,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 5.9,
-    "downloads": 1771,
+    "downloads": 1760,
     "cvr": 0,
     "sparkline": [
       1,
@@ -331,15 +341,15 @@ const iosKeywords: Keyword[] = [
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
-    "change": 1,
+    "change": 2,
     "trafficScore": 5.9,
-    "downloads": 1821,
+    "downloads": 1889,
     "cvr": 0,
     "sparkline": [
       1,
       1,
-      1,
       2,
+      1,
       1,
       1,
       1
@@ -353,7 +363,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 5.6,
-    "downloads": 1373,
+    "downloads": 1442,
     "cvr": 0,
     "sparkline": [
       1,
@@ -367,19 +377,19 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-5",
-    "name": "문제",
+    "name": "qanda",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
-    "change": 2,
-    "trafficScore": 2.9,
-    "downloads": 899,
+    "change": 0,
+    "trafficScore": 3.9,
+    "downloads": 617,
     "cvr": 0,
     "sparkline": [
       1,
-      1,
       2,
-      1,
+      2,
+      2,
       1,
       1,
       1
@@ -387,19 +397,19 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-6",
-    "name": "수학 문제 풀이",
+    "name": "문제",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
-    "change": 1,
+    "change": 2,
     "trafficScore": 2.9,
-    "downloads": 107,
+    "downloads": 915,
     "cvr": 0,
     "sparkline": [
       1,
       1,
-      1,
       2,
+      1,
       1,
       1,
       1
@@ -407,13 +417,13 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-7",
-    "name": "답지",
-    "classification": "primary",
+    "name": "수학 문제 풀이",
+    "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 1,
-    "trafficScore": 2.5,
-    "downloads": 350,
+    "trafficScore": 2.9,
+    "downloads": 104,
     "cvr": 0,
     "sparkline": [
       1,
@@ -427,18 +437,18 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-8",
-    "name": "콴디",
+    "name": "수학문제",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
-    "change": 0,
-    "trafficScore": 2.4,
-    "downloads": 683,
+    "change": 1,
+    "trafficScore": 2.8,
+    "downloads": 288,
     "cvr": 0,
     "sparkline": [
       1,
-      2,
-      2,
+      1,
+      1,
       2,
       1,
       1,
@@ -447,13 +457,13 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-9",
-    "name": "qanda",
+    "name": "콴디",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 2.3,
-    "downloads": 619,
+    "trafficScore": 2.4,
+    "downloads": 682,
     "cvr": 0,
     "sparkline": [
       1,
@@ -473,7 +483,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 2.2,
-    "downloads": 558,
+    "downloads": 557,
     "cvr": 0,
     "sparkline": [
       1,
@@ -493,7 +503,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 2.2,
-    "downloads": 558,
+    "downloads": 557,
     "cvr": 0,
     "sparkline": [
       1,
@@ -533,7 +543,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 1.7,
-    "downloads": 163,
+    "downloads": 169,
     "cvr": 0,
     "sparkline": [
       1,
@@ -647,20 +657,20 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-19",
-    "name": "교육",
-    "classification": "primary",
+    "name": "수학대왕",
+    "classification": "unclassified",
     "currentRank": 2,
-    "previousRank": 1,
-    "change": 3,
-    "trafficScore": 3.1,
-    "downloads": 132,
+    "previousRank": 2,
+    "change": 0,
+    "trafficScore": 6.1,
+    "downloads": 471,
     "cvr": 0,
     "sparkline": [
-      1,
       2,
       3,
       3,
-      1,
+      3,
+      2,
       1,
       1
     ]
@@ -673,7 +683,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 2,
     "change": 0,
     "trafficScore": 3,
-    "downloads": 322,
+    "downloads": 315,
     "cvr": 0,
     "sparkline": [
       2,
@@ -687,13 +697,13 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-21",
-    "name": "수학문제",
-    "classification": "unclassified",
+    "name": "답지",
+    "classification": "primary",
     "currentRank": 2,
     "previousRank": 2,
     "change": 0,
-    "trafficScore": 2.8,
-    "downloads": 278,
+    "trafficScore": 2.5,
+    "downloads": 360,
     "cvr": 0,
     "sparkline": [
       2,
@@ -713,7 +723,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 2,
     "change": 0,
     "trafficScore": 2.2,
-    "downloads": 89,
+    "downloads": 92,
     "cvr": 0,
     "sparkline": [
       2,
@@ -827,18 +837,18 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-28",
-    "name": "수학대왕",
+    "name": "판다",
     "classification": "unclassified",
     "currentRank": 3,
-    "previousRank": 3,
-    "change": 0,
-    "trafficScore": 6.1,
-    "downloads": 471,
+    "previousRank": 2,
+    "change": 1,
+    "trafficScore": 4,
+    "downloads": 164,
     "cvr": 0,
     "sparkline": [
+      2,
       3,
-      4,
-      4,
+      3,
       4,
       3,
       2,
@@ -870,30 +880,30 @@ const iosKeywords: Keyword[] = [
     "name": "공부앱",
     "classification": "unclassified",
     "currentRank": 4,
-    "previousRank": 1,
-    "change": 3,
+    "previousRank": 2,
+    "change": 2,
     "trafficScore": 5.5,
-    "downloads": 106,
+    "downloads": 108,
     "cvr": 0,
     "sparkline": [
-      1,
+      2,
+      3,
+      5,
       4,
-      5,
-      5,
       3,
       2,
-      1
+      2
     ]
   },
   {
     "id": "kw-31",
-    "name": "판다",
-    "classification": "unclassified",
+    "name": "교육",
+    "classification": "primary",
     "currentRank": 4,
     "previousRank": 4,
     "change": 0,
-    "trafficScore": 4,
-    "downloads": 165,
+    "trafficScore": 3.1,
+    "downloads": 136,
     "cvr": 0,
     "sparkline": [
       4,
@@ -933,7 +943,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 5,
     "change": 1,
     "trafficScore": 6.9,
-    "downloads": 233,
+    "downloads": 234,
     "cvr": 0,
     "sparkline": [
       5,
@@ -970,19 +980,19 @@ const iosKeywords: Keyword[] = [
     "name": "과학",
     "classification": "secondary",
     "currentRank": 7,
-    "previousRank": 9,
-    "change": -2,
+    "previousRank": 10,
+    "change": -3,
     "trafficScore": 3.2,
-    "downloads": 62,
+    "downloads": 61,
     "cvr": 0,
     "sparkline": [
-      9,
       10,
-      10,
-      9,
+      12,
+      12,
+      11,
       8,
-      5,
-      5
+      6,
+      4
     ]
   },
   {
@@ -993,7 +1003,7 @@ const iosKeywords: Keyword[] = [
     "previousRank": 9,
     "change": -2,
     "trafficScore": 2.7,
-    "downloads": 16,
+    "downloads": 14,
     "cvr": 0,
     "sparkline": [
       9,
@@ -1010,30 +1020,10 @@ const iosKeywords: Keyword[] = [
     "name": "study",
     "classification": "unclassified",
     "currentRank": 8,
-    "previousRank": 4,
-    "change": 4,
-    "trafficScore": 4.2,
-    "downloads": 49,
-    "cvr": 0,
-    "sparkline": [
-      4,
-      8,
-      9,
-      9,
-      7,
-      4,
-      4
-    ]
-  },
-  {
-    "id": "kw-38",
-    "name": "gauthmath",
-    "classification": "unclassified",
-    "currentRank": 8,
     "previousRank": 6,
     "change": 2,
-    "trafficScore": 0.5,
-    "downloads": 0,
+    "trafficScore": 4.2,
+    "downloads": 50,
     "cvr": 0,
     "sparkline": [
       6,
@@ -1046,7 +1036,7 @@ const iosKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-39",
+    "id": "kw-38",
     "name": "giải bài tập",
     "classification": "unclassified",
     "currentRank": 8,
@@ -1066,14 +1056,34 @@ const iosKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-40",
+    "id": "kw-39",
     "name": "math",
+    "classification": "unclassified",
+    "currentRank": 9,
+    "previousRank": 10,
+    "change": -1,
+    "trafficScore": 4.2,
+    "downloads": 81,
+    "cvr": 0,
+    "sparkline": [
+      10,
+      11,
+      11,
+      11,
+      9,
+      8,
+      8
+    ]
+  },
+  {
+    "id": "kw-40",
+    "name": "q",
     "classification": "unclassified",
     "currentRank": 9,
     "previousRank": 11,
     "change": -2,
-    "trafficScore": 4.3,
-    "downloads": 82,
+    "trafficScore": 4.2,
+    "downloads": 63,
     "cvr": 0,
     "sparkline": [
       11,
@@ -1087,40 +1097,40 @@ const iosKeywords: Keyword[] = [
   },
   {
     "id": "kw-41",
-    "name": "q",
+    "name": "gauthmath",
     "classification": "unclassified",
     "currentRank": 9,
-    "previousRank": 11,
-    "change": -2,
-    "trafficScore": 4.2,
-    "downloads": 65,
+    "previousRank": 9,
+    "change": 0,
+    "trafficScore": 0.5,
+    "downloads": 0,
     "cvr": 0,
     "sparkline": [
-      11,
-      12,
-      12,
-      11,
+      9,
       10,
-      7,
-      7
+      10,
+      10,
+      9,
+      8,
+      8
     ]
   },
   {
     "id": "kw-42",
     "name": "문제집",
     "classification": "unclassified",
-    "currentRank": 14,
-    "previousRank": 20,
-    "change": -6,
+    "currentRank": 13,
+    "previousRank": 18,
+    "change": -5,
     "trafficScore": 5.2,
     "downloads": 39,
     "cvr": 0,
     "sparkline": [
-      20,
-      23,
-      24,
+      18,
       21,
-      16,
+      21,
+      19,
+      15,
       10,
       8
     ]
@@ -1129,40 +1139,40 @@ const iosKeywords: Keyword[] = [
     "id": "kw-43",
     "name": "메가스터디",
     "classification": "unclassified",
-    "currentRank": 22,
-    "previousRank": 26,
-    "change": -4,
+    "currentRank": 16,
+    "previousRank": 15,
+    "change": 1,
     "trafficScore": 7.2,
     "downloads": 12,
     "cvr": 0,
     "sparkline": [
-      26,
-      28,
-      29,
-      27,
-      23,
-      20,
-      18
+      15,
+      16,
+      16,
+      17,
+      16,
+      15,
+      15
     ]
   },
   {
     "id": "kw-44",
-    "name": "ebs 중학",
+    "name": "과외",
     "classification": "unclassified",
-    "currentRank": 25,
-    "previousRank": 34,
-    "change": -9,
-    "trafficScore": 6,
-    "downloads": 35,
+    "currentRank": 27,
+    "previousRank": 33,
+    "change": -6,
+    "trafficScore": 5.8,
+    "downloads": 0,
     "cvr": 0,
     "sparkline": [
-      34,
-      39,
-      40,
+      33,
       36,
-      27,
-      20,
-      16
+      37,
+      34,
+      29,
+      23,
+      21
     ]
   },
   {
@@ -1170,79 +1180,79 @@ const iosKeywords: Keyword[] = [
     "name": "aqua",
     "classification": "unclassified",
     "currentRank": 32,
-    "previousRank": 35,
-    "change": -3,
+    "previousRank": 36,
+    "change": -4,
     "trafficScore": 1.8,
     "downloads": 0,
     "cvr": 0,
     "sparkline": [
-      35,
-      37,
-      37,
       36,
+      38,
+      39,
+      37,
       33,
-      31,
-      29
+      30,
+      28
     ]
   },
   {
     "id": "kw-46",
-    "name": "数学",
-    "classification": "unclassified",
-    "currentRank": 35,
-    "previousRank": 36,
-    "change": -1,
-    "trafficScore": 0.5,
-    "downloads": 0,
-    "cvr": 0,
-    "sparkline": [
-      36,
-      37,
-      37,
-      37,
-      35,
-      34,
-      34
-    ]
-  },
-  {
-    "id": "kw-47",
-    "name": "과외",
-    "classification": "unclassified",
-    "currentRank": 43,
-    "previousRank": 65,
-    "change": -22,
-    "trafficScore": 5.8,
-    "downloads": 0,
-    "cvr": 0,
-    "sparkline": [
-      65,
-      77,
-      80,
-      69,
-      49,
-      30,
-      21
-    ]
-  },
-  {
-    "id": "kw-48",
     "name": "앱",
     "classification": "unclassified",
-    "currentRank": 47,
-    "previousRank": 74,
-    "change": -27,
+    "currentRank": 33,
+    "previousRank": 48,
+    "change": -15,
     "trafficScore": 4.1,
     "downloads": 0,
     "cvr": 0,
     "sparkline": [
-      74,
-      89,
-      92,
-      79,
+      48,
+      57,
+      58,
+      51,
+      37,
+      25,
+      18
+    ]
+  },
+  {
+    "id": "kw-47",
+    "name": "ebs 중학",
+    "classification": "unclassified",
+    "currentRank": 34,
+    "previousRank": 51,
+    "change": -17,
+    "trafficScore": 6,
+    "downloads": 35,
+    "cvr": 0,
+    "sparkline": [
+      51,
+      60,
+      62,
       54,
-      32,
-      20
+      39,
+      24,
+      17
+    ]
+  },
+  {
+    "id": "kw-48",
+    "name": "数学",
+    "classification": "unclassified",
+    "currentRank": 44,
+    "previousRank": 54,
+    "change": -10,
+    "trafficScore": 0.5,
+    "downloads": 0,
+    "cvr": 0,
+    "sparkline": [
+      54,
+      59,
+      61,
+      56,
+      46,
+      38,
+      34
     ]
   }
 ];
@@ -1252,25 +1262,25 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
     "id": "sg-9",
     "name": "메가스터디",
     "trafficScore": 7.2,
-    "currentRank": 22,
+    "currentRank": 16,
     "category": "교육/학습",
     "isMonitored": false,
-    "reason": "트래픽 7.2, 검색량 12"
+    "reason": "순위 1단계 상승 중, 트래픽 7.2"
   },
   {
-    "id": "sg-3",
+    "id": "sg-2",
     "name": "수학대왕",
     "trafficScore": 6.1,
-    "currentRank": 3,
+    "currentRank": 2,
     "category": "수학/풀이",
     "isMonitored": false,
     "reason": "Top 10 유지 중, 트래픽 6.1"
   },
   {
-    "id": "sg-10",
+    "id": "sg-12",
     "name": "ebs 중학",
     "trafficScore": 6,
-    "currentRank": 25,
+    "currentRank": 34,
     "category": "시험/입시",
     "isMonitored": false,
     "reason": "트래픽 6, 검색량 35"
@@ -1282,13 +1292,13 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
     "currentRank": 1,
     "category": "수학/풀이",
     "isMonitored": false,
-    "reason": "순위 1단계 상승 중, 트래픽 5.9"
+    "reason": "순위 2단계 상승 중, 트래픽 5.9"
   },
   {
-    "id": "sg-11",
+    "id": "sg-10",
     "name": "과외",
     "trafficScore": 5.8,
-    "currentRank": 43,
+    "currentRank": 27,
     "category": "교육/학습",
     "isMonitored": false,
     "reason": "트래픽 5.8, 검색량 0"
@@ -1300,25 +1310,16 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
     "currentRank": 4,
     "category": "교육/학습",
     "isMonitored": false,
-    "reason": "순위 3단계 상승 중, 트래픽 5.5"
+    "reason": "순위 2단계 상승 중, 트래픽 5.5"
   },
   {
     "id": "sg-8",
     "name": "문제집",
     "trafficScore": 5.2,
-    "currentRank": 14,
+    "currentRank": 13,
     "category": "수학/풀이",
     "isMonitored": false,
     "reason": "트래픽 5.2, 검색량 39"
-  },
-  {
-    "id": "sg-6",
-    "name": "math",
-    "trafficScore": 4.3,
-    "currentRank": 9,
-    "category": "수학/풀이",
-    "isMonitored": false,
-    "reason": "Top 10 유지 중, 트래픽 4.3"
   },
   {
     "id": "sg-5",
@@ -1327,7 +1328,16 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
     "currentRank": 8,
     "category": "교육/학습",
     "isMonitored": false,
-    "reason": "순위 4단계 상승 중, 트래픽 4.2"
+    "reason": "순위 2단계 상승 중, 트래픽 4.2"
+  },
+  {
+    "id": "sg-6",
+    "name": "math",
+    "trafficScore": 4.2,
+    "currentRank": 9,
+    "category": "수학/풀이",
+    "isMonitored": false,
+    "reason": "Top 10 유지 중, 트래픽 4.2"
   },
   {
     "id": "sg-7",
@@ -1339,16 +1349,16 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "Top 10 유지 중, 트래픽 4.2"
   },
   {
-    "id": "sg-12",
+    "id": "sg-11",
     "name": "앱",
     "trafficScore": 4.1,
-    "currentRank": 47,
+    "currentRank": 33,
     "category": "앱/서비스",
     "isMonitored": false,
     "reason": "트래픽 4.1, 검색량 0"
   },
   {
-    "id": "sg-2",
+    "id": "sg-3",
     "name": "photomath",
     "trafficScore": 3,
     "currentRank": 2,
@@ -1359,54 +1369,54 @@ const iosSuggestedKeywords: SuggestedKeyword[] = [
 ];
 
 const iosWeeklyReport: WeeklyReport = {
-  "period": "2026-03-11 ~ 2026-03-18",
-  "generatedAt": "2026-03-18 07:00",
+  "period": "2026-03-13 ~ 2026-03-20",
+  "generatedAt": "2026-03-20 07:00",
   "highlights": {
     "topRisers": [
       {
-        "keyword": "study",
-        "change": 4
+        "keyword": "수학문제풀이",
+        "change": 2
       },
       {
-        "keyword": "교육",
-        "change": 3
+        "keyword": "문제",
+        "change": 2
       },
       {
         "keyword": "공부앱",
-        "change": 3
+        "change": 2
       }
     ],
     "topFallers": [
       {
-        "keyword": "앱",
-        "change": -27
-      },
-      {
-        "keyword": "과외",
-        "change": -22
-      },
-      {
         "keyword": "ebs 중학",
-        "change": -9
+        "change": -17
+      },
+      {
+        "keyword": "앱",
+        "change": -15
+      },
+      {
+        "keyword": "数学",
+        "change": -10
       }
     ]
   },
   "kpiSummary": {
-    "avgRank": 7.1,
-    "avgRankChange": -1.3,
-    "totalDownloads": 19998,
+    "avgRank": 6.7,
+    "avgRankChange": -1.1,
+    "totalDownloads": 20120,
     "totalDownloadsChange": 0,
     "avgCvr": 0,
     "avgCvrChange": 0
   },
-  "asoScore": 77,
+  "asoScore": 78,
   "asoScoreTarget": 85
 };
 
-// ─── Android Data (Sensor Tower 2026-03-18) ───
+// ─── Android Data (Sensor Tower 2026-03-20) ───
 
 const androidCollectionStatus: DataCollectionStatus[] = [
-  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-18 02:52" },
+  { source: "sensor-tower", label: "Sensor Tower", status: "success", lastUpdated: "2026-03-20 10:01" },
 ];
 
 const androidKeywords: Keyword[] = [
@@ -1418,7 +1428,7 @@ const androidKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 7.8,
-    "downloads": 6550,
+    "downloads": 6528,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1438,7 +1448,7 @@ const androidKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 4.8,
-    "downloads": 1991,
+    "downloads": 1983,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1456,14 +1466,14 @@ const androidKeywords: Keyword[] = [
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
-    "change": 1,
+    "change": 0,
     "trafficScore": 4.1,
-    "downloads": 935,
+    "downloads": 930,
     "cvr": 0,
     "sparkline": [
       1,
-      1,
-      1,
+      2,
+      2,
       2,
       1,
       1,
@@ -1478,7 +1488,7 @@ const androidKeywords: Keyword[] = [
     "previousRank": 1,
     "change": 0,
     "trafficScore": 4.1,
-    "downloads": 745,
+    "downloads": 746,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1492,13 +1502,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-5",
-    "name": "문제풀이",
+    "name": "콰다",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 3.2,
-    "downloads": 781,
+    "trafficScore": 3.1,
+    "downloads": 890,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1512,13 +1522,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-6",
-    "name": "콰다",
+    "name": "콴디",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 3.1,
-    "downloads": 898,
+    "trafficScore": 3,
+    "downloads": 831,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1532,13 +1542,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-7",
-    "name": "콴디",
+    "name": "콴",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 3,
-    "downloads": 839,
+    "trafficScore": 2.8,
+    "downloads": 718,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1552,13 +1562,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-8",
-    "name": "콴",
+    "name": "쾬다",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
     "trafficScore": 2.8,
-    "downloads": 723,
+    "downloads": 718,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1572,13 +1582,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-9",
-    "name": "쾬다",
-    "classification": "unclassified",
+    "name": "답지",
+    "classification": "primary",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 2.8,
-    "downloads": 723,
+    "trafficScore": 2.6,
+    "downloads": 570,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1592,13 +1602,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-10",
-    "name": "답지",
-    "classification": "primary",
+    "name": "콴가",
+    "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 2.6,
-    "downloads": 577,
+    "trafficScore": 2.4,
+    "downloads": 521,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1612,13 +1622,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-11",
-    "name": "콴가",
+    "name": "콴드",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
     "trafficScore": 2.4,
-    "downloads": 520,
+    "downloads": 521,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1632,13 +1642,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-12",
-    "name": "콴드",
+    "name": "콴더",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 2.4,
-    "downloads": 520,
+    "trafficScore": 2.2,
+    "downloads": 407,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1652,13 +1662,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-13",
-    "name": "콴더",
-    "classification": "unclassified",
+    "name": "문제 풀이",
+    "classification": "primary",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 2.2,
-    "downloads": 398,
+    "trafficScore": 1.8,
+    "downloads": 214,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1672,13 +1682,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-14",
-    "name": "문제 풀이",
-    "classification": "primary",
+    "name": "콴다 선생님 수학 문제 풀어주는 과외",
+    "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
     "trafficScore": 1.8,
-    "downloads": 211,
+    "downloads": 280,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1692,13 +1702,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-15",
-    "name": "콴다 선생님 수학 문제 풀어주는 과외",
+    "name": "qanda",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 1.8,
-    "downloads": 283,
+    "trafficScore": 1.7,
+    "downloads": 243,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1712,13 +1722,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-16",
-    "name": "qanda",
+    "name": "수학문제 풀이",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 1.7,
-    "downloads": 244,
+    "trafficScore": 1.6,
+    "downloads": 180,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1732,13 +1742,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-17",
-    "name": "수학문제 풀이",
+    "name": "콴자",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
     "trafficScore": 1.6,
-    "downloads": 174,
+    "downloads": 214,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1752,13 +1762,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-18",
-    "name": "콴자",
+    "name": "수학풀이",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 1.6,
-    "downloads": 213,
+    "trafficScore": 1.4,
+    "downloads": 121,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1772,13 +1782,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-19",
-    "name": "수학풀이",
+    "name": "칸다",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
-    "trafficScore": 1.4,
-    "downloads": 117,
+    "trafficScore": 1.3,
+    "downloads": 125,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1792,13 +1802,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-20",
-    "name": "칸다",
+    "name": "콴타",
     "classification": "unclassified",
     "currentRank": 1,
     "previousRank": 1,
     "change": 0,
     "trafficScore": 1.3,
-    "downloads": 118,
+    "downloads": 133,
     "cvr": 0,
     "sparkline": [
       1,
@@ -1812,26 +1822,6 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-21",
-    "name": "콴타",
-    "classification": "unclassified",
-    "currentRank": 1,
-    "previousRank": 1,
-    "change": 0,
-    "trafficScore": 1.3,
-    "downloads": 130,
-    "cvr": 0,
-    "sparkline": [
-      1,
-      2,
-      2,
-      2,
-      1,
-      1,
-      1
-    ]
-  },
-  {
-    "id": "kw-22",
     "name": "数学解説",
     "classification": "unclassified",
     "currentRank": 1,
@@ -1851,20 +1841,40 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-23",
+    "id": "kw-22",
     "name": "수학문제",
     "classification": "unclassified",
     "currentRank": 2,
     "previousRank": 1,
     "change": 1,
     "trafficScore": 3.9,
-    "downloads": 197,
+    "downloads": 201,
     "cvr": 0,
     "sparkline": [
       1,
       2,
       2,
       3,
+      2,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "kw-23",
+    "name": "문제풀이",
+    "classification": "unclassified",
+    "currentRank": 2,
+    "previousRank": 3,
+    "change": -1,
+    "trafficScore": 3.2,
+    "downloads": 767,
+    "cvr": 0,
+    "sparkline": [
+      3,
+      4,
+      4,
+      4,
       2,
       1,
       1
@@ -1878,7 +1888,7 @@ const androidKeywords: Keyword[] = [
     "previousRank": 3,
     "change": -1,
     "trafficScore": 2.2,
-    "downloads": 368,
+    "downloads": 360,
     "cvr": 0,
     "sparkline": [
       3,
@@ -1892,33 +1902,13 @@ const androidKeywords: Keyword[] = [
   },
   {
     "id": "kw-25",
-    "name": "수학대왕",
-    "classification": "unclassified",
-    "currentRank": 4,
-    "previousRank": 1,
-    "change": 7,
-    "trafficScore": 5,
-    "downloads": 249,
-    "cvr": 0,
-    "sparkline": [
-      1,
-      3,
-      6,
-      6,
-      2,
-      1,
-      1
-    ]
-  },
-  {
-    "id": "kw-26",
     "name": "문제집 앱",
     "classification": "unclassified",
     "currentRank": 4,
     "previousRank": 4,
     "change": 0,
     "trafficScore": 4.9,
-    "downloads": 45,
+    "downloads": 54,
     "cvr": 0,
     "sparkline": [
       4,
@@ -1931,34 +1921,14 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-27",
-    "name": "과외",
-    "classification": "unclassified",
-    "currentRank": 4,
-    "previousRank": 3,
-    "change": 1,
-    "trafficScore": 4.8,
-    "downloads": 187,
-    "cvr": 0,
-    "sparkline": [
-      3,
-      4,
-      4,
-      5,
-      4,
-      3,
-      3
-    ]
-  },
-  {
-    "id": "kw-28",
+    "id": "kw-26",
     "name": "공부",
     "classification": "primary",
     "currentRank": 5,
     "previousRank": 4,
     "change": 1,
     "trafficScore": 5.7,
-    "downloads": 228,
+    "downloads": 226,
     "cvr": 0,
     "sparkline": [
       4,
@@ -1971,14 +1941,14 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-29",
+    "id": "kw-27",
     "name": "공부앱",
     "classification": "unclassified",
     "currentRank": 5,
     "previousRank": 8,
     "change": -3,
     "trafficScore": 3.6,
-    "downloads": 89,
+    "downloads": 81,
     "cvr": 0,
     "sparkline": [
       8,
@@ -1991,14 +1961,14 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-30",
+    "id": "kw-28",
     "name": "공부 앱",
     "classification": "unclassified",
     "currentRank": 5,
     "previousRank": 8,
     "change": -3,
     "trafficScore": 2.1,
-    "downloads": 30,
+    "downloads": 28,
     "cvr": 0,
     "sparkline": [
       8,
@@ -2011,43 +1981,83 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-31",
+    "id": "kw-29",
     "name": "답안지",
     "classification": "unclassified",
     "currentRank": 6,
-    "previousRank": 9,
-    "change": -3,
+    "previousRank": 10,
+    "change": -4,
     "trafficScore": 1.8,
-    "downloads": 150,
+    "downloads": 148,
     "cvr": 0,
     "sparkline": [
-      9,
-      11,
-      11,
       10,
+      12,
+      13,
+      11,
       7,
-      5,
-      3
+      4,
+      2
     ]
   },
   {
-    "id": "kw-32",
+    "id": "kw-30",
     "name": "답답한",
     "classification": "unclassified",
     "currentRank": 9,
-    "previousRank": 1,
-    "change": 41,
+    "previousRank": 3,
+    "change": 6,
     "trafficScore": 1.2,
     "downloads": 5,
     "cvr": 0,
     "sparkline": [
-      1,
-      4,
-      23,
+      3,
+      8,
+      11,
+      10,
+      7,
+      3,
+      3
+    ]
+  },
+  {
+    "id": "kw-31",
+    "name": "ㅋ",
+    "classification": "unclassified",
+    "currentRank": 10,
+    "previousRank": 13,
+    "change": -3,
+    "trafficScore": 4.9,
+    "downloads": 53,
+    "cvr": 0,
+    "sparkline": [
+      13,
+      15,
+      15,
+      14,
+      11,
+      9,
+      7
+    ]
+  },
+  {
+    "id": "kw-32",
+    "name": "답",
+    "classification": "unclassified",
+    "currentRank": 10,
+    "previousRank": 17,
+    "change": -7,
+    "trafficScore": 1.3,
+    "downloads": 21,
+    "cvr": 0,
+    "sparkline": [
       17,
-      1,
-      1,
-      1
+      21,
+      22,
+      19,
+      12,
+      6,
+      3
     ]
   },
   {
@@ -2055,183 +2065,143 @@ const androidKeywords: Keyword[] = [
     "name": "답니다",
     "classification": "unclassified",
     "currentRank": 10,
-    "previousRank": 1,
-    "change": 17,
+    "previousRank": 11,
+    "change": -1,
     "trafficScore": 1.2,
     "downloads": 28,
     "cvr": 0,
     "sparkline": [
-      1,
-      8,
-      16,
-      13,
-      3,
-      1,
-      1
+      11,
+      12,
+      12,
+      12,
+      10,
+      9,
+      9
     ]
   },
   {
     "id": "kw-34",
-    "name": "답",
+    "name": "qova",
     "classification": "unclassified",
-    "currentRank": 11,
-    "previousRank": 21,
-    "change": -10,
-    "trafficScore": 1.3,
-    "downloads": 22,
+    "currentRank": 13,
+    "previousRank": 7,
+    "change": 6,
+    "trafficScore": 6.4,
+    "downloads": 82,
     "cvr": 0,
     "sparkline": [
-      21,
-      26,
-      28,
-      23,
-      13,
-      5,
-      1
+      7,
+      12,
+      15,
+      14,
+      11,
+      7,
+      7
     ]
   },
   {
     "id": "kw-35",
-    "name": "ㅋ",
+    "name": "답다",
     "classification": "unclassified",
-    "currentRank": 12,
-    "previousRank": 18,
-    "change": -6,
-    "trafficScore": 4.9,
-    "downloads": 52,
+    "currentRank": 17,
+    "previousRank": 32,
+    "change": -15,
+    "trafficScore": 3.4,
+    "downloads": 128,
     "cvr": 0,
     "sparkline": [
-      18,
+      32,
+      41,
+      42,
+      35,
       21,
-      22,
-      19,
-      14,
-      8,
-      6
+      9,
+      2
     ]
   },
   {
     "id": "kw-36",
-    "name": "qova",
-    "classification": "unclassified",
-    "currentRank": 13,
-    "previousRank": 1,
-    "change": 14,
-    "trafficScore": 6.4,
-    "downloads": 80,
+    "name": "수학",
+    "classification": "primary",
+    "currentRank": 24,
+    "previousRank": 45,
+    "change": -21,
+    "trafficScore": 5.4,
+    "downloads": 68,
     "cvr": 0,
     "sparkline": [
-      1,
-      11,
-      18,
-      15,
-      7,
-      1,
-      1
+      45,
+      57,
+      59,
+      49,
+      30,
+      12,
+      3
     ]
   },
   {
     "id": "kw-37",
-    "name": "답다",
+    "name": "과외",
     "classification": "unclassified",
-    "currentRank": 15,
-    "previousRank": 27,
-    "change": -12,
-    "trafficScore": 3.4,
-    "downloads": 135,
+    "currentRank": 27,
+    "previousRank": 49,
+    "change": -22,
+    "trafficScore": 4.8,
+    "downloads": 188,
     "cvr": 0,
     "sparkline": [
-      27,
-      34,
-      35,
-      29,
-      18,
-      8,
-      3
+      49,
+      61,
+      64,
+      53,
+      33,
+      14,
+      5
     ]
   },
   {
     "id": "kw-38",
-    "name": "수학",
-    "classification": "primary",
-    "currentRank": 23,
-    "previousRank": 43,
-    "change": -20,
-    "trafficScore": 5.4,
-    "downloads": 78,
+    "name": "답사",
+    "classification": "unclassified",
+    "currentRank": 27,
+    "previousRank": 49,
+    "change": -22,
+    "trafficScore": 2.2,
+    "downloads": 14,
     "cvr": 0,
     "sparkline": [
-      43,
-      54,
-      56,
-      47,
-      29,
-      11,
-      3
+      49,
+      61,
+      64,
+      53,
+      33,
+      14,
+      5
     ]
   },
   {
     "id": "kw-39",
-    "name": "답사",
+    "name": "수학대왕",
     "classification": "unclassified",
-    "currentRank": 26,
-    "previousRank": 27,
-    "change": -1,
-    "trafficScore": 2.2,
-    "downloads": 15,
+    "currentRank": 45,
+    "previousRank": 79,
+    "change": -34,
+    "trafficScore": 5,
+    "downloads": 253,
     "cvr": 0,
     "sparkline": [
-      27,
-      28,
-      28,
-      28,
-      26,
+      79,
+      97,
+      102,
+      85,
+      54,
       25,
-      25
+      11
     ]
   },
   {
     "id": "kw-40",
-    "name": "숙제",
-    "classification": "unclassified",
-    "currentRank": 37,
-    "previousRank": 73,
-    "change": -36,
-    "trafficScore": 1.7,
-    "downloads": 121,
-    "cvr": 0,
-    "sparkline": [
-      73,
-      93,
-      97,
-      79,
-      47,
-      16,
-      1
-    ]
-  },
-  {
-    "id": "kw-41",
-    "name": "photomath",
-    "classification": "unclassified",
-    "currentRank": 52,
-    "previousRank": 54,
-    "change": -2,
-    "trafficScore": 3.3,
-    "downloads": 1,
-    "cvr": 0,
-    "sparkline": [
-      54,
-      55,
-      55,
-      54,
-      53,
-      50,
-      50
-    ]
-  },
-  {
-    "id": "kw-42",
     "name": "칸타타",
     "classification": "unclassified",
     "currentRank": 54,
@@ -2251,97 +2221,137 @@ const androidKeywords: Keyword[] = [
     ]
   },
   {
-    "id": "kw-43",
+    "id": "kw-41",
     "name": "에그릿",
     "classification": "unclassified",
-    "currentRank": 55,
-    "previousRank": 55,
+    "currentRank": 60,
+    "previousRank": 60,
     "change": 0,
     "trafficScore": 5.5,
     "downloads": 17,
     "cvr": 0,
     "sparkline": [
-      55,
-      56,
-      56,
-      56,
-      55,
-      54,
-      54
+      60,
+      61,
+      61,
+      61,
+      60,
+      59,
+      59
     ]
   },
   {
-    "id": "kw-44",
+    "id": "kw-42",
+    "name": "photomath",
+    "classification": "unclassified",
+    "currentRank": 62,
+    "previousRank": 75,
+    "change": -13,
+    "trafficScore": 3.3,
+    "downloads": 1,
+    "cvr": 0,
+    "sparkline": [
+      75,
+      82,
+      84,
+      78,
+      65,
+      54,
+      49
+    ]
+  },
+  {
+    "id": "kw-43",
     "name": "지우다",
     "classification": "unclassified",
-    "currentRank": 84,
-    "previousRank": 162,
-    "change": -78,
+    "currentRank": 82,
+    "previousRank": 158,
+    "change": -76,
     "trafficScore": 2,
     "downloads": 1,
     "cvr": 0,
     "sparkline": [
-      162,
-      205,
-      214,
-      176,
-      105,
-      38,
+      158,
+      200,
+      209,
+      171,
+      103,
+      37,
       6
+    ]
+  },
+  {
+    "id": "kw-44",
+    "name": "숙제",
+    "classification": "unclassified",
+    "currentRank": 89,
+    "previousRank": 177,
+    "change": -88,
+    "trafficScore": 1.7,
+    "downloads": 114,
+    "cvr": 0,
+    "sparkline": [
+      177,
+      225,
+      236,
+      192,
+      113,
+      37,
+      1
     ]
   },
   {
     "id": "kw-45",
     "name": "canada",
     "classification": "unclassified",
-    "currentRank": 128,
-    "previousRank": 110,
-    "change": 18,
+    "currentRank": 124,
+    "previousRank": 105,
+    "change": 19,
     "trafficScore": 0.5,
     "downloads": 0,
     "cvr": 0,
     "sparkline": [
-      110,
-      126,
-      134,
-      131,
-      121,
-      111,
-      110
+      105,
+      122,
+      130,
+      128,
+      117,
+      107,
+      105
     ]
   }
 ];
 
 const androidSuggestedKeywords: SuggestedKeyword[] = [
   {
-    "id": "sg-11",
+    "id": "sg-9",
     "name": "qova",
     "trafficScore": 6.4,
     "currentRank": 13,
     "category": "기타",
     "isMonitored": false,
-    "reason": "순위 14단계 상승 중, 트래픽 6.4"
+    "reason": "순위 6단계 상승 중, 트래픽 6.4"
   },
   {
-    "id": "sg-14",
+    "id": "sg-13",
     "name": "에그릿",
     "trafficScore": 5.5,
-    "currentRank": 55,
+    "currentRank": 60,
     "category": "기타",
     "isMonitored": false,
     "reason": "트래픽 5.5, 검색량 17"
   },
   {
-    "id": "sg-6",
+    "id": "sg-12",
     "name": "수학대왕",
     "trafficScore": 5,
-    "currentRank": 4,
+    "currentRank": 45,
     "category": "수학/풀이",
     "isMonitored": false,
-    "reason": "순위 7단계 상승 중, 트래픽 5"
+    "reason": "트래픽 5, 검색량 253"
   },
   {
-    "id": "sg-7",
+    "id": "sg-6",
     "name": "문제집 앱",
     "trafficScore": 4.9,
     "currentRank": 4,
@@ -2350,13 +2360,13 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "Top 10 유지 중, 트래픽 4.9"
   },
   {
-    "id": "sg-10",
+    "id": "sg-8",
     "name": "ㅋ",
     "trafficScore": 4.9,
-    "currentRank": 12,
+    "currentRank": 10,
     "category": "기타",
     "isMonitored": false,
-    "reason": "트래픽 4.9, 검색량 52"
+    "reason": "Top 10 유지 중, 트래픽 4.9"
   },
   {
     "id": "sg-1",
@@ -2368,13 +2378,13 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "Top 10 유지 중, 트래픽 4.8"
   },
   {
-    "id": "sg-8",
+    "id": "sg-11",
     "name": "과외",
     "trafficScore": 4.8,
-    "currentRank": 4,
+    "currentRank": 27,
     "category": "교육/학습",
     "isMonitored": false,
-    "reason": "순위 1단계 상승 중, 트래픽 4.8"
+    "reason": "트래픽 4.8, 검색량 188"
   },
   {
     "id": "sg-2",
@@ -2383,7 +2393,7 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "currentRank": 1,
     "category": "수학/풀이",
     "isMonitored": false,
-    "reason": "순위 1단계 상승 중, 트래픽 4.1"
+    "reason": "Top 10 유지 중, 트래픽 4.1"
   },
   {
     "id": "sg-3",
@@ -2395,7 +2405,7 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "Top 10 유지 중, 트래픽 4.1"
   },
   {
-    "id": "sg-5",
+    "id": "sg-4",
     "name": "수학문제",
     "trafficScore": 3.9,
     "currentRank": 2,
@@ -2404,7 +2414,7 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "순위 1단계 상승 중, 트래픽 3.9"
   },
   {
-    "id": "sg-9",
+    "id": "sg-7",
     "name": "공부앱",
     "trafficScore": 3.6,
     "currentRank": 5,
@@ -2413,28 +2423,28 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
     "reason": "Top 10 유지 중, 트래픽 3.6"
   },
   {
-    "id": "sg-12",
+    "id": "sg-10",
     "name": "답다",
     "trafficScore": 3.4,
-    "currentRank": 15,
+    "currentRank": 17,
     "category": "수학/풀이",
     "isMonitored": false,
-    "reason": "트래픽 3.4, 검색량 135"
+    "reason": "트래픽 3.4, 검색량 128"
   },
   {
-    "id": "sg-13",
+    "id": "sg-14",
     "name": "photomath",
     "trafficScore": 3.3,
-    "currentRank": 52,
+    "currentRank": 62,
     "category": "수학/풀이",
     "isMonitored": false,
     "reason": "트래픽 3.3, 검색량 1"
   },
   {
-    "id": "sg-4",
+    "id": "sg-5",
     "name": "문제풀이",
     "trafficScore": 3.2,
-    "currentRank": 1,
+    "currentRank": 2,
     "category": "수학/풀이",
     "isMonitored": false,
     "reason": "Top 10 유지 중, 트래픽 3.2"
@@ -2442,49 +2452,82 @@ const androidSuggestedKeywords: SuggestedKeyword[] = [
 ];
 
 const androidWeeklyReport: WeeklyReport = {
-  "period": "2026-03-11 ~ 2026-03-18",
-  "generatedAt": "2026-03-18 07:00",
+  "period": "2026-03-13 ~ 2026-03-20",
+  "generatedAt": "2026-03-20 07:00",
   "highlights": {
     "topRisers": [
       {
-        "keyword": "답답한",
-        "change": 41
-      },
-      {
         "keyword": "canada",
-        "change": 18
+        "change": 19
       },
       {
-        "keyword": "답니다",
-        "change": 17
+        "keyword": "답답한",
+        "change": 6
+      },
+      {
+        "keyword": "qova",
+        "change": 6
       }
     ],
     "topFallers": [
       {
-        "keyword": "지우다",
-        "change": -78
-      },
-      {
         "keyword": "숙제",
-        "change": -36
+        "change": -88
       },
       {
-        "keyword": "수학",
-        "change": -20
+        "keyword": "지우다",
+        "change": -76
+      },
+      {
+        "keyword": "수학대왕",
+        "change": -34
       }
     ]
   },
   "kpiSummary": {
-    "avgRank": 13.1,
-    "avgRankChange": -1.6,
-    "totalDownloads": 19788,
+    "avgRank": 15.9,
+    "avgRankChange": -6.2,
+    "totalDownloads": 19711,
     "totalDownloadsChange": 0,
     "avgCvr": 0,
     "avgCvrChange": 0
   },
-  "asoScore": 77,
+  "asoScore": 68,
   "asoScoreTarget": 85
 };
+
+// ─── Download Sources Mock Data (30일) ───
+// 실제 데이터가 Google Sheets에 쌓이면 이 mock은 fallback으로만 사용됨
+
+function generateMockDownloadSources(os: "ios" | "android"): DownloadSourcePoint[] {
+  const result: DownloadSourcePoint[] = [];
+  // iOS는 검색 비중 높고, Android는 브라우징 비중 높은 패턴
+  const base = os === "ios"
+    ? { organicSearch: 520, organicBrowse: 280, paidSearch: 120, paidDisplay: 80, webReferral: 90, appReferral: 60 }
+    : { organicSearch: 350, organicBrowse: 220, paidSearch: 80, paidDisplay: 70, webReferral: 65, appReferral: 45 };
+
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    const date = d.toISOString().slice(0, 10);
+    const dayOfWeek = d.getDay();
+    const wf = (dayOfWeek === 0 || dayOfWeek === 6) ? 0.75 : 1;
+    const r = () => (Math.random() - 0.5) * 40;
+
+    result.push({
+      date,
+      organicSearch: Math.max(0, Math.round((base.organicSearch + Math.sin(i * 0.3) * 50 + r()) * wf)),
+      organicBrowse: Math.max(0, Math.round((base.organicBrowse + Math.sin(i * 0.4) * 30 + r()) * wf)),
+      paidSearch: Math.max(0, Math.round((base.paidSearch + Math.cos(i * 0.35) * 25 + r()) * wf)),
+      paidDisplay: Math.max(0, Math.round((base.paidDisplay + Math.cos(i * 0.5) * 20 + r()) * wf)),
+      webReferral: Math.max(0, Math.round((base.webReferral + Math.sin(i * 0.5) * 15 + r()) * wf)),
+      appReferral: Math.max(0, Math.round((base.appReferral + Math.cos(i * 0.3) * 10 + r()) * wf)),
+    });
+  }
+  return result;
+}
+
+const iosDownloadSources = generateMockDownloadSources("ios");
+const androidDownloadSources = generateMockDownloadSources("android");
 
 // ─── OS-aware data accessors ───
 
@@ -2517,6 +2560,10 @@ export function getSuggestedKeywords(os: OS): SuggestedKeyword[] {
 
 export function getWeeklyReport(os: OS): WeeklyReport {
   return osData[os].weeklyReport;
+}
+
+export function getDownloadSourceData(os: OS): DownloadSourcePoint[] {
+  return os === "ios" ? iosDownloadSources : androidDownloadSources;
 }
 
 // Legacy exports

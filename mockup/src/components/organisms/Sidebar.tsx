@@ -16,6 +16,7 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { label: "Overview", icon: "IconHome", iconFill: "IconHomeFill", path: "/" },
   { label: "Keywords", icon: "IconSearch", iconFill: "IconSearch", path: "/keywords", badge: 14 },
+  { label: "Sources", icon: "IconPie", iconFill: "IconPie", path: "/sources" },
   { label: "Suggestions", icon: "IconLightbulb", iconFill: "IconLightbulbFill", path: "/suggestions", badge: 10 },
 
   { label: "Reports", icon: "IconPage", iconFill: "IconPageFill", path: "/reports" },

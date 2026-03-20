@@ -4,7 +4,7 @@
  * Sensor Tower 웹 스크래핑 → JSON 파일 저장 + Google Sheets 적재 (Apps Script)
  */
 import { collectSensorTowerData } from './sensor-tower.js';
-import { writeRankings, writeDownloads, writeCategoryRank, writeSuggestions, writeCollectionLog } from './sheets-writer.js';
+import { writeRankings, writeDownloads, writeCategoryRank, writeSuggestions, writeDownloadSources, writeCollectionLog } from './sheets-writer.js';
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -40,6 +40,9 @@ async function main() {
         await writeCategoryRank(TODAY, stData.categoryRankings);
       }
       await writeSuggestions(TODAY, stData.iosRankings, stData.androidRankings);
+      if (stData.downloadSources) {
+        await writeDownloadSources(TODAY, stData.downloadSources);
+      }
       console.log('✓ Google Sheets 적재 성공\n');
     } catch (e) {
       console.error('✗ Google Sheets 적재 실패:', e.message);

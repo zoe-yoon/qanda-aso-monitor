@@ -234,6 +234,62 @@ async function collectCategoryRankings(page, csrfToken) {
 }
 
 /**
+ * OS별 유입 경로(다운로드 소스) 수집
+ * API: GET /v1/{os}/downloads_by_sources
+ * 소스 분류: organic(검색+브라우징), browser(웹 레퍼럴), paid(광고)
+ */
+async function collectDownloadSources(page, csrfToken) {
+  console.log('[ST] OS별 유입 경로(다운로드 소스) 수집...');
+
+  const endDate = new Date().toISOString().slice(0, 10);
+  const startDate = new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10);
+
+  const sources = { ios: [], android: [] };
+
+  for (const [platform, view] of Object.entries(ST.views)) {
+    const os = platform === 'ios' ? 'ios' : 'android';
+
+    // /api/{os}/downloads_by_sources 엔드포인트 호출
+    const result = await page.evaluate(async ({ uai, csrf, startDate, endDate, os }) => {
+      try {
+        const res = await fetch(
+          `/api/${os}/downloads_by_sources?app_ids=${uai}&countries=KR&start_date=${startDate}&end_date=${endDate}&date_granularity=daily`,
+          { headers: { 'X-CSRF-Token': csrf } }
+        );
+        if (res.status === 200) {
+          const data = await res.json();
+          return { success: true, data };
+        }
+        return { success: false, status: res.status };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
+    }, { uai: ST.uai, csrf: csrfToken, startDate, endDate, os });
+
+    if (result.success) {
+      console.log(`[ST] ${platform.toUpperCase()} 유입 경로 API 성공`);
+      const breakdown = result.data?.data?.[0]?.breakdown || [];
+
+      sources[os] = breakdown.map(entry => ({
+        date: entry.date,
+        organicSearch: entry.organic_search_abs ?? 0,
+        organicBrowse: entry.organic_browse_abs ?? 0,
+        paidSearch: entry.paid_search_abs ?? 0,
+        paidDisplay: entry.paid_display_abs ?? (entry.paid_abs ?? 0) - (entry.paid_search_abs ?? 0),
+        webReferral: entry.browser_abs ?? 0,
+        appReferral: entry.app_referral_abs ?? 0,
+      }));
+    } else {
+      console.warn(`[ST] ${platform.toUpperCase()} 유입 경로 API 실패 (${result.status || result.error})`);
+    }
+
+    console.log(`[ST] ${platform.toUpperCase()} 유입 경로: ${sources[os].length}일 데이터`);
+  }
+
+  return sources;
+}
+
+/**
  * 앱 개요 수집 (DOM 스크래핑 — API 없음)
  */
 async function collectAppOverview(page) {
@@ -304,6 +360,7 @@ export async function collectSensorTowerData() {
       iosRankings: {},
       androidRankings: {},
       categoryRankings: {},
+      downloadSources: { ios: [], android: [] },
       overview: {},
       collectedAt: new Date().toISOString(),
     };
@@ -317,13 +374,16 @@ export async function collectSensorTowerData() {
     // 3. 카테고리 랭킹 (API)
     data.categoryRankings = await collectCategoryRankings(page, csrfToken);
 
-    // 4. 앱 개요 (DOM)
+    // 4. OS별 유입 경로 (API)
+    data.downloadSources = await collectDownloadSources(page, csrfToken);
+
+    // 5. 앱 개요 (DOM)
     data.overview = await collectAppOverview(page);
 
-    // 5. 세션 갱신 저장
+    // 6. 세션 갱신 저장
     await saveSession(context);
 
-    // 6. JSON 저장
+    // 7. JSON 저장
     const outputDir = join(config.paths.root, 'data');
     mkdirSync(outputDir, { recursive: true });
     const outputPath = join(outputDir, `st-${data.date}.json`);
